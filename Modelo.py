@@ -39,8 +39,23 @@ def modelo(x, t):
     
     return [dxdt, dydt, dvxdt, dvydt]
 
-
-
 #implementar
 tempo = np.arange(0, 5, 1e-3)
 CI = []
+x0 = 30
+y0 = 0
+vx0 = 0
+vy0 = 0
+z0 = [x0,y0,vx0,vy0]
+
+solucao = odeint(modelo, z0, tempo)
+xs = solucao[:,0]
+ys = solucao[:,1]
+vxs = solucao[:,2]
+vys = solucao[:,3]
+
+plt.plot(xs,ys)
+plt.xlabel('posições em X')
+plt.ylabel('posições em Y')
+plt.grid()
+plt.show()
