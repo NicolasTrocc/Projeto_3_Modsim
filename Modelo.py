@@ -23,14 +23,17 @@ def modelo(x, t):
     v = ((vx**2) + (vy**2))**(1/2)
 
     Far = (1/2)*Cd*p*Area*(v**2)
-    cos_0 = (vx/v)
-    sen_0 = (vy/v)
+    cos_a = -(vx/v)
+    sen_a = -(vy/v)
+    cos_0 = (Sx/L)
+    sen_0 = -(Sy/L)
+
     P = m*g
 
     T = ((m*(v**2)/L) + (P*cos_0))
     
-    Rx = -(Far*cos_0) + (T*sen_0)
-    Ry = (T*cos_0) - P + (Far*sen_0)
+    Rx = -(Far*cos_a) + (T*sen_0)
+    Ry = (T*cos_0) - P + (Far*sen_a)
 
     dxdt = vx
     dydt = vy
