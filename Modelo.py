@@ -14,19 +14,25 @@ Area = 0.965
 L = 1
 
 #modelo
-def modelo(x, t):
+def modelo(z, t):
     
-    Sx = x[0]
-    Sy = x[1]
-    vx = x[2]
-    vy = x[3]
+    Sx = z[0]
+    Sy = z[1]
+    vx = z[2]
+    vy = z[3]
     v = ((vx**2) + (vy**2))**(1/2)
-
-    Far = (1/2)*Cd*p*Area*(v**2)
-    cos_a = -(vx/v)
-    sen_a = -(vy/v)
-    cos_0 = (Sx/L)
-    sen_0 = -(Sy/L)
+    if v == 0:
+        Far = 0
+        cos_a = 0
+        sen_a = 0
+        cos_0 = 0
+        sen_0 = 0
+    else:
+        Far = (1/2)*Cd*p*Area*(v**2)
+        cos_a = -(vx/v)
+        sen_a = -(vy/v)
+        cos_0 = (Sx/L)
+        sen_0 = -(Sy/L)
 
     P = m*g
 
@@ -39,8 +45,8 @@ def modelo(x, t):
     dydt = vy
     dvxdt = Rx/m
     dvydt = Ry/m
-    
-    return [dxdt, dydt, dvxdt, dvydt]
+    dzdt = [dxdt, dydt, dvxdt, dvydt]
+    return dzdt
 
 #implementar
 tempo = np.arange(0, 5, 1e-3)
