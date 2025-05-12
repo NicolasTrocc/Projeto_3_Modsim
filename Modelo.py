@@ -1,17 +1,14 @@
-#Aqui serão definidos os parametros e as funções modelo
 import numpy as np
 import matplotlib.pyplot as plt
 from math import *
 from scipy.integrate import odeint
 
-#parametros
-
 m = 75
 g = 9.8
 p = 1.2
 Cd = 1.05
-Area = 0.965
-L = 1
+A = 0.965
+L = 20
 
 #modelo
 def modelo(z, t):
@@ -21,25 +18,26 @@ def modelo(z, t):
     vx = z[2]
     vy = z[3]
     v = ((vx**2) + (vy**2))**(1/2)
-    if v == 0:
+    v2 = v**2
+    if v > 0:
+        Far = (Cd*p*A*(v2))/2
+        cos_a = (-vx/v)
+        sen_a = (-vy/v)
+            
+    else:
         Far = 0
         cos_a = 0
         sen_a = 0
-        cos_0 = 0
-        sen_0 = 0
-    else:
-        Far = (1/2)*Cd*p*Area*(v**2)
-        cos_a = -(vx/v)
-        sen_a = -(vy/v)
-        cos_0 = (Sx/L)
-        sen_0 = -(Sy/L)
-
+        
+      
+    sen_0 = (Sx/L)
+    cos_0 = (-Sy/L)
     P = m*g
-
-    T = ((m*(v**2)/L) + (P*cos_0))
     
-    Rx = -(Far*cos_a) + (T*sen_0)
-    Ry = (T*cos_0) - P + (Far*sen_a)
+    T = ((m*(v2)/L) + (P*cos_0))
+    
+    Rx = Far*cos_a - T*sen_0
+    Ry = T*cos_0 - P + Far*sen_a
 
     dxdt = vx
     dydt = vy
@@ -50,9 +48,8 @@ def modelo(z, t):
 
 #implementar
 tempo = np.arange(0, 5, 1e-3)
-CI = []
-x0 = 30
-y0 = 0
+x0 = L*sin(radians(45))
+y0 = -L*cos(radians(45))
 vx0 = 0
 vy0 = 0
 z0 = [x0,y0,vx0,vy0]
@@ -64,6 +61,7 @@ vxs = solucao[:,2]
 vys = solucao[:,3]
 
 plt.plot(xs,ys)
+plt.plot(xs[0],ys[0],'ro')
 plt.xlabel('posições em X')
 plt.ylabel('posições em Y')
 plt.grid()
