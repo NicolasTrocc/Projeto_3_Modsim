@@ -10,9 +10,14 @@ Cd = 1.05
 A = 0.965
 L = 2
 
-#modelo
-def modelo(z, t):
-    
+tempo = np.arange(0, 10, 1e-3)
+x0 = L*sin(radians(45))
+y0 = -L*cos(radians(45))
+vx0 = 0
+vy0 = 0
+z0 = [x0,y0,vx0,vy0]
+
+def modelo2(z, t, Lenght):
     Sx = z[0]
     Sy = z[1]
     vx = z[2]
@@ -29,12 +34,12 @@ def modelo(z, t):
         cos_a = 0
         sen_a = 0
         
+    Lenght = sqrt((Sx**2)+(Sy**2))
+    sen_0 = (Sx/Lenght)
+    cos_0 = (-Sy/Lenght)
+    P = m*g 
     
-    sen_0 = (Sx/L)
-    cos_0 = (-Sy/L)
-    P = m*g
-    
-    T = ((m*(v2)/L) + (P*cos_0))
+    T = ((m*(v2)/Lenght) + (P*cos_0))
     
     Rx = Far*cos_a - T*sen_0
     Ry = T*cos_0 - P + Far*sen_a
@@ -45,25 +50,3 @@ def modelo(z, t):
     dvydt = Ry/m
     dzdt = [dxdt, dydt, dvxdt, dvydt]
     return dzdt
-
-#implementar
-tempo = np.arange(0, 10, 1e-3)
-x0 = L*sin(radians(45))
-y0 = -L*cos(radians(45))
-vx0 = 0
-vy0 = 0
-z0 = [x0,y0,vx0,vy0]
-
-solucao = odeint(modelo, z0, tempo)
-xs = solucao[:,0]
-ys = solucao[:,1]
-vxs = solucao[:,2]
-vys = solucao[:,3]
-
-plt.plot(xs,ys)
-# plt.plot(xs[0],ys[0],'ro')
-plt.xlabel('posição em X')
-plt.ylabel('posição em y')
-plt.grid()
-plt.axis('equal')
-plt.show()
