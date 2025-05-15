@@ -8,7 +8,7 @@ g = 9.8
 p = 1.2
 Cd = 1.05
 A = 0.965
-L = 20
+L = 2
 
 #modelo
 def modelo(z, t):
@@ -29,7 +29,7 @@ def modelo(z, t):
         cos_a = 0
         sen_a = 0
         
-      
+    
     sen_0 = (Sx/L)
     cos_0 = (-Sy/L)
     P = m*g
@@ -60,16 +60,15 @@ ys = solucao[:,1]
 vxs = solucao[:,2]
 vys = solucao[:,3]
 
-plt.plot(xs,ys)
-plt.plot(xs[0],ys[0],'ro')
-plt.xlabel('posições em X')
-plt.ylabel('posições em Y')
+plt.plot(tempo,vxs)
+# plt.plot(xs[0],ys[0],'ro')
+plt.xlabel('tempo')
+plt.ylabel('Velocidade em X')
 plt.grid()
 plt.axis('equal')
-plt.show()
+# plt.show()
 
 def modelo2(z, t, Lenght):
-    
     Sx = z[0]
     Sy = z[1]
     vx = z[2]
@@ -86,7 +85,7 @@ def modelo2(z, t, Lenght):
         cos_a = 0
         sen_a = 0
         
-      
+    Lenght = sqrt((Sx**2)+(Sy**2))
     sen_0 = (Sx/Lenght)
     cos_0 = (-Sy/Lenght)
     P = m*g 
