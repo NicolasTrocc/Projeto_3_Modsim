@@ -17,10 +17,10 @@ vye = data.vy.tolist()
 
 m = 0.06
 g = 9.8
-p = 1.2
-Cd = 1.05
+p = 1.3
+Cd = 3.4
 A = 0.004
-L = 0.17
+L = 0.232
 
 #modelo
 def modelo(z, t):
@@ -59,9 +59,9 @@ def modelo(z, t):
     return dzdt
 
 #implementar
-tempo = np.arange(0, 10, 1e-3)
-x0 = L*sin(radians(45))
-y0 = -L*cos(radians(45))
+tempo = np.arange(10.5, 26, 1e-3)
+x0 = L*sin(radians(60))
+y0 = -L*cos(radians(60))
 vx0 = 0
 vy0 = 0
 z0 = [x0,y0,vx0,vy0]
@@ -74,11 +74,6 @@ vys = solucao[:,3]
 
 plt.plot(xs,ys)
 # plt.plot(xs[0],ys[0],'ro')
-plt.xlabel('posição em X')
-plt.ylabel('posição em y')
-plt.grid()
-plt.axis('equal')
-
 plt.title('trajetoria')
 plt.xlabel('x(t)')
 plt.ylabel('y(t)')
@@ -87,8 +82,8 @@ plt.axis('equal')
 plt.grid()
 plt.show()
 
-
 plt.plot(te, xe, 'mo', label='experimento')
+plt.plot(tempo, xs)
 plt.grid()
 plt.show()
 
