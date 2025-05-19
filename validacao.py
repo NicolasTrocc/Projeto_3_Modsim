@@ -14,12 +14,12 @@ ye = data.y.tolist()
 vxe = data.vx.tolist()
 vye = data.vy.tolist()
 
-
+raio = medida/2*pi
 m = 0.06
 g = 9.8
 p = 1.3
-Cd = 3.4
-A = 0.004
+Cd = 0.42
+A = 0.004 #
 L = 0.232
 
 #modelo
