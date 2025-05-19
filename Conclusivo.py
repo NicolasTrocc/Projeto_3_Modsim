@@ -17,7 +17,7 @@ for L in lista_L:
     soly = result[:,1]
     svxs = result[:,2]
     svys = result[:,3]
-    plt.plot(solx,soly)
+    plt.plot(m.tempo,svxs)
     # plt.plot(solx[0], soly[0], 'bo')
 plt.grid()
 plt.xlabel('tempo')
