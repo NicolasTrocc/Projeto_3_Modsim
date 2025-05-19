@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from math import *
 from scipy.integrate import odeint
+import pandas
 
 lista_L = np.arange(0.5, 40.5, 0.5)
 
@@ -17,4 +18,26 @@ for L in lista_L:
 plt.grid()
 plt.xlabel('tempo')
 plt.ylabel('velocidade em x')
+plt.show()
+
+
+
+colunas = ['t', 'x', 'y', 'vx', 'vy']
+data = pandas.read_csv('pendulos novo.csv', names=colunas)
+
+te = data.t.tolist()
+xe = data.x.tolist()
+ye = data.y.tolist()
+vxe = data.vx.tolist()
+vye = data.vy.tolist()
+
+plt.title('trajetoria')
+plt.xlabel('x(t)')
+plt.ylabel('y(t)')
+plt.plot(xe, ye, 'mo', label='experimento')
+plt.plot
+
+
+plt.axis('equal')
+plt.grid()
 plt.show()

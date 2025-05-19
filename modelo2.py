@@ -50,3 +50,4 @@ def modelo2(z, t, Lenght):
     dvydt = Ry/m
     dzdt = [dxdt, dydt, dvxdt, dvydt]
     return dzdt
+
