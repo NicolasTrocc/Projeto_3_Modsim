@@ -14,12 +14,12 @@ ye = data.y.tolist()
 vxe = data.vx.tolist()
 vye = data.vy.tolist()
 
-raio = medida/2*pi
-m = 0.06
-g = 9.8
-p = 1.3
-Cd = 0.42
-A = 0.004 #
+raio = 0.042/2
+m = 0.021
+g = 9.786
+p = 1.2
+Cd = 0.5
+A = pi * (raio**2) 
 L = 0.232
 
 #modelo
@@ -84,6 +84,11 @@ plt.show()
 
 plt.plot(te, xe, 'mo', label='experimento')
 plt.plot(tempo, xs)
+plt.xlabel('tempo [s]')
+plt.ylabel('posição x [m]')
 plt.grid()
 plt.show()
+
+solucao_temp = odeint(modelo, z0, te)
+
 

@@ -52,10 +52,11 @@ for ma in lista_m:
     svys = result[:,3]
     velmax.append(max(svxs))
 
-print(velmax)
+
     
 plt.plot(lista_m,velmax)
 plt.grid()
 plt.ylabel('Velocidades máximas')
 plt.xlabel('massa')
 plt.show()
+
