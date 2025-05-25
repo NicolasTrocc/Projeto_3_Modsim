@@ -13,13 +13,30 @@ xe = data.x.tolist()
 ye = data.y.tolist()
 vxe = data.vx.tolist()
 vye = data.vy.tolist()
+#encontra xs mais prox a zero
+menor = min(xe)
+zeros = []
+indices = []
+for x in range(len(xe)):
+    if xe[x] >= menor and xe[x] <= menor+0.01:
+        zeros.append(xe[x])
+        indices.append(x)
+#calcula velocidades
+vel_maxes = []
+for i in indices:
+    vely = (abs(ye[i]) - abs(ye[i-1]))/(1/30)
+    velx = (abs(xe[i]) - abs(xe[i-1]))/(1/30)
+    vm = sqrt(velx**2+vely**2)
+    vel_maxes.append(vm)
 
-raio = medida/2*pi
+vmax = max(vel_maxes)
+
+# raio = medida/2*pi
 m = 0.06
 g = 9.8
 p = 1.3
 Cd = 0.42
-A = 0.004 #
+A = 0.004
 L = 0.232
 
 #modelo
@@ -71,6 +88,15 @@ xs = solucao[:,0]
 ys = solucao[:,1]
 vxs = solucao[:,2]
 vys = solucao[:,3]
+vs = []
+for v in range(len(vxs)):
+    agr = sqrt(vxs[v]**2+vys[v]**2)
+    vs.append(agr)
+
+vmas = max(vs)
+erro_pct = vmas/(vmax-1)
+
+print (abs(erro_pct))
 
 plt.plot(xs,ys)
 # plt.plot(xs[0],ys[0],'ro')
@@ -87,3 +113,4 @@ plt.plot(tempo, xs)
 plt.grid()
 plt.show()
 
+# print(erro_medio)
