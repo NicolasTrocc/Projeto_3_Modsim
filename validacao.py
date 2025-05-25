@@ -13,8 +13,22 @@ xe = data.x.tolist()
 ye = data.y.tolist()
 vxe = data.vx.tolist()
 vye = data.vy.tolist()
+menor = min(xe)
+indices = []
+v_maxes = []
+for x in range(len(xe)):
+    if xe[x] >= menor and xe[x] <= menor+0.01:
+        indices.append(x)
 
-raio = medida/2*pi
+for i in indices:
+    vx = (abs(xe[i])-abs(xe[i-1]))/(1/30)
+    vy = (abs(ye[i])-abs(ye[i-1]))/(1/30)
+    quero = sqrt(vx**2+vy**2)
+    v_maxes.append(quero)
+
+vmax = max(v_maxes)
+
+# raio = medida/2*pi
 m = 0.06
 g = 9.8
 p = 1.3
